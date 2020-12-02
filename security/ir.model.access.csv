@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pfmanager_pegawai,access_pfmanager_pegawai,model_pfmanager_pegawai,,1,1,1,1
+access_pfmanager_proyek,access_pfmanager_proyek,model_pfmanager_proyek,,1,1,1,1
+access_pfmanager_kebencanaan,access_pfmanager_kebencanaan,model_pfmanager_kebencanaan,,1,1,1,1
+access_pfmanager_assessment,access_pfmanager_assessment,model_pfmanager_assessment,,1,1,1,1
+access_pfmanager_peserta,access_pfmanager_peserta,model_pfmanager_peserta,,1,1,1,1
+access_pfmanager_kegiatan,access_pfmanager_kegiatan,model_pfmanager_kegiatan,,1,1,1,1
+access_pfmanager_resource,access_pfmanager_resource,model_pfmanager_resource,,1,1,1,1
+access_pfmanager_progress,access_pfmanager_progress,model_pfmanager_progress,,1,1,1,1
+access_pfmanager_evaluasi,access_pfmanager_evaluasi,model_pfmanager_evaluasi,,1,1,1,1
