@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="pfmanager.daftar_proyek">
+      <field name="name">Daftar proyek</field>
+      <field name="model">pfmanager.proyek</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nama"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="pfmanager.proyek_action">
+      <field name="name">Proyek</field>
+      <field name="res_model">pfmanager.proyek</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Buat proyek baru!
+        </p>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="pfmanager.action_window">
+      <field name="name">Project window</field>
+      <field name="res_model">pfmanager.pfmanager</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="pfmanager.action_server">
+      <field name="name">Project server</field>
+      <field name="model_id" ref="model_project_project"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <menuitem name="PFManager"
+              id="pfmanager.menu_root"
+              sequence="10"/>
+
+    <!-- menu categories -->
+    <menuitem name="Proyek" id="pfmanager.proyek_menu" parent="pfmanager.menu_root"/>
+    <menuitem name="Menu 2" id="pfmanager.proyek_menu_2" parent="pfmanager.menu_root"/>
+    <!-- actions -->
+    <menuitem name="List" id="pfmanager.proyek_menu_list" parent="pfmanager.proyek_menu"
+              action="pfmanager.proyek_action"/>
+<!--    <menuitem name="Server to list" id="pfmanager" parent="pfmanager.menu_2"-->
+<!--              action="pfmanager.action_server"/>-->
+  </data>
+</odoo>
