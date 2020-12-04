@@ -3,14 +3,11 @@ from odoo import models, fields, api
 
 
 class Pegawai(models.Model):
-    _name = 'pfmanager.pegawai'
+    _inherit = ['res.users']
     _description = ''
 
-    nama = fields.Char()
-    email = fields.Char()
-    password = fields.Char()
     proyek_ids = fields.Many2many(
-        'pfmanager.proyek', 'proyek_pegawai_rel', 'pegawai_id', 'proyek_id'
+        'pfmanager.proyek', 'proyek_pegawai_rel', 'pegawai_id', 'proyek_id', string="Proyek yang Diatur"
     )
 
 
@@ -20,7 +17,7 @@ class Proyek(models.Model):
 
     nama = fields.Char()
     pegawai_ids = fields.Many2many(
-        'pfmanager.pegawai', 'proyek_pegawai_rel', 'proyek_id', 'pegawai_id'
+        'res.users', 'proyek_pegawai_rel', 'proyek_id', 'pegawai_id'
     )
     peserta_id = fields.One2many(
         'pfmanager.peserta', 'proyek_id',
@@ -67,12 +64,20 @@ class Kegiatan(models.Model):
     nama = fields.Char()
     waktu_mulai = fields.Datetime()
     waktu_akhir = fields.Datetime()
+    biaya_total = fields.Integer(compute='_compute_total')
     proyek_id = fields.Many2one(
         'pfmanager.proyek'
     )
     resource_id = fields.One2many(
-        'pfmanager.resource', 'kegiatan_id',
+        'pfmanager.resource', 'kegiatan_id'
     )
+
+    @api.depends('resource_id')
+    def _compute_total(self):
+        for record in self:
+            record.biaya_total = 0
+            for resource in record.resource_id:
+                record.biaya_total += resource.biaya * resource.beban_kerja
 
 
 class Resource(models.Model):
@@ -99,9 +104,6 @@ class Peserta(models.Model):
     proyek_id = fields.Many2one(
         'pfmanager.proyek'
     )
-    evaluasi_id = fields.One2many(
-        'pfmanager.evaluasi', 'peserta_id',
-    )
     progress_id = fields.One2many(
         'pfmanager.progress', 'peserta_id',
     )
@@ -127,3 +129,11 @@ class Evaluasi(models.Model):
     peserta_id = fields.Many2one(
         'pfmanager.peserta'
     )
+
+
+class FAQ(models.Model):
+    _name = 'pfmanager.faq'
+    _description = ''
+
+    pertanyaan = fields.Text()
+    jawaban = fields.Text()

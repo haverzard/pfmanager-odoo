@@ -2,11 +2,150 @@
 <odoo>
   <data>
     <record model="ir.ui.view" id="pfmanager.daftar_proyek">
-      <field name="name">Daftar proyek</field>
+      <field name="name">Daftar Proyek</field>
       <field name="model">pfmanager.proyek</field>
       <field name="arch" type="xml">
         <tree>
           <field name="nama"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.daftar_proyek_kanban">
+      <field name="name">Daftar Proyek Kanban</field>
+      <field name="model">pfmanager.proyek</field>
+      <field name="arch" type="xml">
+        <kanban>
+          <field name="nama"/>
+          <templates>
+              <t t-name="kanban-box">
+                  <div t-attf-class="oe_kanban_global_click">
+                      <div class="oe_kanban_details">
+                          <strong class="o_kanban_record_title">
+                          <field name="nama"/>
+                          </strong>
+                      </div>
+                  </div>
+              </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.faq_kanban">
+      <field name="name">FAQ Kanban</field>
+      <field name="model">pfmanager.faq</field>
+      <field name="arch" type="xml">
+        <kanban>
+          <field name="pertanyaan"/>
+          <field name="jawaban"/>
+          <templates>
+              <t t-name="kanban-box">
+                  <div t-attf-class="oe_kanban_global_click" style="width: 80%">
+                      <div class="oe_kanban_details">
+                          <strong class="o_kanban_record_title">
+                            <table>
+                              <td style="vertical-align: top; width: 50px;">
+                                <strong>Q: </strong>
+                              </td>
+                              <td>
+                                <field name="pertanyaan"/>
+                              </td>
+                            </table>
+                          </strong>
+                      </div>
+                      <br/>
+                      <div class="oe_kanban_details">
+                        <table>
+                          <td style="vertical-align: top; width: 50px;">
+                            <strong>A: </strong>
+                          </td>
+                          <td>
+                            <field name="jawaban"/>
+                          </td>
+                        </table>
+                      </div>
+                  </div>
+              </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.daftar_kebencanaan">
+      <field name="name">Daftar Kebencanaan</field>
+      <field name="model">pfmanager.kebencanaan</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="rincian_kebencanaan"/>
+          <field name="lokasi"/>
+          <field name="proyek_id"/>
+          <field name="waktu_observasi"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.daftar_assessment">
+      <field name="name">Daftar Assessment</field>
+      <field name="model">pfmanager.assessment</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="kebutuhan"/>
+          <field name="nama_narasumber"/>
+          <field name="proyek_id"/>
+          <field name="no_handphone"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.daftar_peserta">
+      <field name="name">Daftar Peserta</field>
+      <field name="model">pfmanager.peserta</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nama"/>
+          <field name="umur"/>
+          <field name="no_handphone"/>
+          <field name="proyek_id"/>
+          <field name="tempat_tinggal"/>
+          <field name="email"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.daftar_kegiatan">
+      <field name="name">Daftar Kegiatan</field>
+      <field name="model">pfmanager.kegiatan</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nama"/>
+          <field name="waktu_mulai"/>
+          <field name="waktu_akhir"/>
+          <field name="proyek_id"/>
+          <field name="biaya_total"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.calender_kegiatan">
+      <field name="name">Daftar Kegiatan</field>
+      <field name="model">pfmanager.kegiatan</field>
+      <field name="arch" type="xml">
+        <calendar string="Calendar View" date_start="waktu_mulai" date_stop="waktu_akhir" mode="month">
+          <field name="nama"/>
+          <field name="biaya_total"/>
+        </calendar>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.daftar_evaluasi">
+      <field name="name">Daftar Evaluasi</field>
+      <field name="model">pfmanager.evaluasi</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="evaluasi"/>
+          <field name="nilai_performansi"/>
+          <field name="peserta_id"/>
         </tree>
       </field>
     </record>
@@ -22,14 +161,87 @@
       </field>
     </record>
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="pfmanager.action_window">
-      <field name="name">Project window</field>
-      <field name="res_model">pfmanager.pfmanager</field>
-      <field name="view_mode">tree,form</field>
+    <record model="ir.actions.act_window" id="pfmanager.kebencanaan_action">
+      <field name="name">Kebencanaan</field>
+      <field name="context">{'group_by':['proyek_id']}</field>
+      <field name="res_model">pfmanager.kebencanaan</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Masukkan data kebencanaan baru!
+        </p>
+      </field>
     </record>
--->
+
+    <record model="ir.actions.act_window" id="pfmanager.assessment_action">
+      <field name="name">Assessment</field>
+      <field name="context">{'group_by':['proyek_id']}</field>
+      <field name="res_model">pfmanager.assessment</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Masukkan data assessment baru!
+        </p>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="pfmanager.kegiatan_action">
+      <field name="name">Kegiatan</field>
+      <field name="res_model">pfmanager.kegiatan</field>
+      <field name="view_mode">calendar,tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Masukkan data kegiatan baru!
+        </p>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="pfmanager.peserta_action">
+      <field name="name">Peserta</field>
+      <field name="context">{'group_by':['proyek_id']}</field>
+      <field name="res_model">pfmanager.peserta</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Masukkan data peserta baru!
+        </p>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="pfmanager.evaluasi_action">
+      <field name="name">Evaluasi</field>
+      <field name="context">{'group_by':['peserta_id']}</field>
+      <field name="res_model">pfmanager.evaluasi</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Masukkan data evaluasi baru!
+        </p>
+      </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="pfmanager.pegawai_action">
+      <field name="name">Pegawai</field>
+      <field name="res_model">res.users</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Daftar pegawai baru!
+        </p>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="pfmanager.faq_action">
+      <field name="name">FAQ</field>
+      <field name="res_model">pfmanager.faq</field>
+      <field name="view_mode">kanban,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Tidak ada FAQ!
+        </p>
+      </field>
+    </record>
 
     <!-- server action to the one above -->
 <!--
@@ -54,10 +266,23 @@
 
     <!-- menu categories -->
     <menuitem name="Proyek" id="pfmanager.proyek_menu" parent="pfmanager.menu_root"/>
-    <menuitem name="Menu 2" id="pfmanager.proyek_menu_2" parent="pfmanager.menu_root"/>
+    <menuitem name="Pegawai" id="pfmanager.pegawai_menu" parent="pfmanager.menu_root"
+      action="pfmanager.pegawai_action"/>
+    <menuitem name="Evaluasi" id="pfmanager.evaluasi_menu" parent="pfmanager.menu_root"
+      action="pfmanager.evaluasi_action"/>
+    <menuitem name="FAQ" id="pfmanager.faq_menu" parent="pfmanager.menu_root"
+      action="pfmanager.faq_action"/>
     <!-- actions -->
-    <menuitem name="List" id="pfmanager.proyek_menu_list" parent="pfmanager.proyek_menu"
+    <menuitem name="Daftar Proyek" id="pfmanager.proyek_menu_list" parent="pfmanager.proyek_menu"
               action="pfmanager.proyek_action"/>
+    <menuitem name="Kebencanaan" id="pfmanager.kebencanaan_menu_list" parent="pfmanager.proyek_menu"
+              action="pfmanager.kebencanaan_action"/>
+    <menuitem name="Assessment" id="pfmanager.assessment_menu_list" parent="pfmanager.proyek_menu"
+              action="pfmanager.assessment_action"/>
+    <menuitem name="Peserta" id="pfmanager.peserta_menu_list" parent="pfmanager.proyek_menu"
+              action="pfmanager.peserta_action"/>
+    <menuitem name="Kegiatan" id="pfmanager.kegiatan_menu_list" parent="pfmanager.proyek_menu"
+              action="pfmanager.kegiatan_action"/>
 <!--    <menuitem name="Server to list" id="pfmanager" parent="pfmanager.menu_2"-->
 <!--              action="pfmanager.action_server"/>-->
   </data>

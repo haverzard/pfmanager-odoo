@@ -18,6 +18,17 @@ class PFManager(http.Controller):
             'root': '/pfmanager',
         })
 
+    @http.route('/login', auth='public', csrf=False, methods=['GET'])
+    def login_page(self, **kw):
+        return http.request.render('pfmanager.homepage', {
+            'root': '/pfmanager',
+        })
+
+    @http.route('/login', auth='public', csrf=False, methods=['POST'])
+    def login(self, db, email, password):
+        http.request.session.authenticate(db, email, password)
+        return 'Login success'
+
 class Proyek(http.Controller):
     @http.route('/proyek/', auth='public', methods=['GET'])
     def daftar_proyek(self, **kw):
