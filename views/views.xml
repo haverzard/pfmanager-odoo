@@ -243,21 +243,6 @@
       </field>
     </record>
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="pfmanager.action_server">
-      <field name="name">Project server</field>
-      <field name="model_id" ref="model_project_project"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
 
     <!-- Top menu item -->
     <menuitem name="PFManager"

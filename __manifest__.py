@@ -3,11 +3,10 @@
     'name': "PFManager",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        ODOO Module for Pertamina Foundation""",
 
     'description': """
-        Long description of module's purpose
+        ODOO Module for Pertamina Foundation
     """,
 
     'author': "haverzard",
@@ -24,13 +23,17 @@
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
         'security/security-group.xml',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
+    ],
+    'qweb': [
+        'static/src/img/*',
+        'static/src/css/*',
     ],
     'installable': True,
     'application': True,

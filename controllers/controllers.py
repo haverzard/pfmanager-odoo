@@ -12,11 +12,11 @@ def middleware_check_attrs(req_data, attrs=[]):
 
 
 class PFManager(http.Controller):
-    @http.route('/', auth='public')
-    def index(self, **kw):
-        return http.request.render('pfmanager.homepage', {
-            'root': '/pfmanager',
-        })
+    # @http.route('/', auth='public')
+    # def index(self, **kw):
+    #     return http.request.render('pfmanager.homepage', {
+    #         'root': '/pfmanager',
+    #     })
 
     @http.route('/login', auth='public', csrf=False, methods=['GET'])
     def login_page(self, **kw):
