@@ -48,10 +48,7 @@
                               <td style="vertical-align: top; width: 50px;">
                                 <strong>Q: </strong>
                               </td>
-                              <td>
-                                <field name="pertanyaan"/>
-                              </td>
-                            </table>
+                              <td style="white-space: pre-wrap;"><field name="pertanyaan"/></td>                            </table>
                           </strong>
                       </div>
                       <br/>
@@ -60,9 +57,7 @@
                           <td style="vertical-align: top; width: 50px;">
                             <strong>A: </strong>
                           </td>
-                          <td>
-                            <field name="jawaban"/>
-                          </td>
+                          <td style="white-space: pre-wrap;"><field name="jawaban"/></td>
                         </table>
                       </div>
                   </div>
@@ -146,6 +141,29 @@
           <field name="evaluasi"/>
           <field name="nilai_performansi"/>
           <field name="peserta_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.daftar_resource">
+      <field name="name">Daftar Resource</field>
+      <field name="model">pfmanager.resource</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nama"/>
+          <field name="beban_kerja"/>
+          <field name="biaya"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pfmanager.progress_peserta">
+      <field name="name">Progress Peserta</field>
+      <field name="model">pfmanager.progress</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="bulan_ke"/>
+          <field name="catatan"/>
         </tree>
       </field>
     </record>
